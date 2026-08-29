@@ -77,11 +77,12 @@ gender_encoded = label_encoder_gender.transform([gender])[0]
 geography_encoded = onehot_encoder_geo.transform([[geography]])[0]
 
 # Scale the input data
-input_data = np.array([[gender_encoded, age, balance, credit_score, estimated_salary, tenure, num_of_products, has_cr_card, is_active_member,*geography_encoded]])
+input_data = np.array([[credit_score, gender_encoded, age, tenure, balance, num_of_products, has_cr_card, is_active_member, estimated_salary,*geography_encoded]])
 input_data = scaler.transform(input_data)
 
 # Predict churn
 prediction = model.predict(input_data)
+st.write("Prediction probability:", prediction[0][0])
 
 # Display the prediction result
 if st.button("Predict"):
